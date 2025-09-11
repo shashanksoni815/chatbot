@@ -1,84 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>Puter.js Chatbot</title>
-  <script src="https://js.puter.com/v2/"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 600px;
-      margin: 30px auto;
-      background: #f7f7f7;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    #chat {
-      background: white;
-      padding: 15px;
-      border-radius: 8px;
-      height: 400px;
-      overflow-y: auto;
-      margin-bottom: 15px;
-    }
-    .user {
-      font-weight: bold;
-      color: #007acc;
-      margin-top: 10px;
-    }
-    .bot {
-      color: #333;
-      margin-bottom: 10px;
-    }
-    input, button {
-      padding: 10px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 14px;
-    }
-    button {
-      background: #007acc;
-      color: white;
-      margin-left: 8px;
-      cursor: pointer;
-    }
-    button:hover {
-      background: #005a99;
-    }
-  </style>
-</head>
-<body>
-  <h2>🤖 AI Chatbot (Puter.js + GPT-5-nano)</h2>
-  <div id="chat"></div>
-  <input id="userInput" type="text" placeholder="Type your message..." />
-  <button onclick="sendMessage()">Send</button>
-
-  <script>
-    const chatBox = document.getElementById("chat");
-    const input = document.getElementById("userInput");
-
-    async function sendMessage() {
-      const userText = input.value.trim();
-      if (!userText) return;
-
-      // Show user message
-      chatBox.innerHTML += `<div class="user">You: ${userText}</div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
-      input.value = "";
-
-      // Start bot reply
-      chatBox.innerHTML += `<div class="bot"><b>Bot:</b> <span id="streaming"></span></div>`;
-      chatBox.scrollTop = chatBox.scrollHeight;
-
-      // Stream response from GPT-5-nano
-      const response = await puter.ai.chat(userText, { stream: true, model: "gpt-5-nano" });
-      for await (const part of response) {
-        document.getElementById("streaming").textContent += part?.text || "";
-        chatBox.scrollTop = chatBox.scrollHeight;
-      }
-      document.getElementById("streaming").removeAttribute("id");
-    }
-  </script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + React</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
